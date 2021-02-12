@@ -52,8 +52,8 @@ resource "aws_batch_compute_environment" "this" {
     )
   }
 
-  type  = var.compute_environment_type
-  state = var.compute_environment_state
+  type  = var.compute_environment_managed ? "MANAGED" : "UNMANAGED"
+  state = var.compute_environment_enabled ? "ENABLED" : "DISABLED"
 
   service_role = var.service_role_arn != null ? var.service_role_arn : aws_iam_role.service_role.0.arn
 

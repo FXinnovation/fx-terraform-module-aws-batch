@@ -1,5 +1,6 @@
 variable "tags" {
   description = "Map of tags that will be applied on all resources."
+  type        = map(string)
   default     = {}
 }
 
@@ -45,30 +46,21 @@ variable "compute_environment_name_prefix" {
   }
 }
 
-variable "compute_environment_type" {
-  description = "The type of the compute environment. Valid items are MANAGED or UNMANAGED."
-  type        = string
-  default     = "MANAGED"
-
-  validation {
-    condition     = contains(["MANAGED", "UNMANAGED"], var.compute_environment_type)
-    error_message = "The var.compute_environment_type value must be MANAGED or UNMANAGED."
-  }
+variable "compute_environment_managed" {
+  description = "Whether or not to manage the compute environment (toggles compute_environment.type MANAGED/UNMANAGED)."
+  type        = bool
+  default     = true
 }
 
-variable "compute_environment_state" {
-  description = "The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED."
-  type        = string
-  default     = "ENABLED"
-
-  validation {
-    condition     = contains(["ENABLED", "DISABLED"], var.compute_environment_state)
-    error_message = "The var.compute_environment_state value must be ENABLED or DISABLED."
-  }
+variable "compute_environment_enabled" {
+  description = "Whether or not to enable the compute environment (toggles compute_environment.state ENABLED/DISABLED.)."
+  type        = bool
+  default     = true
 }
 
 variable "compute_environment_tags" {
   description = "Key-value map of resource tags for the compute environment (merged with `var.tags`)"
+  type        = map(string)
   default     = {}
 }
 
@@ -78,8 +70,8 @@ variable "compute_environment_arns" {
   default     = []
 
   validation {
-    condition     = can([for s in var.compute_environment_arns : regex("^arn:aws:batch:[a-z]{2}-[a-z]*-[1-9]:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$", s)])
-    error_message = "Each entries of var.compute_environment_arns should match ^arn:aws:batch:[a-z]{2}-[a-z]*-[1-9]:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$."
+    condition     = can([for s in var.compute_environment_arns : regex("^arn:aws:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$", s)])
+    error_message = "Each entries of var.compute_environment_arns should match ^arn:aws:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$."
   }
 }
 
@@ -98,12 +90,22 @@ variable "compute_resource_min_vcpus" {
   description = "The minimum number of EC2 vCPUs that an environment should maintain."
   type        = number
   default     = 0
+
+  validation {
+    condition     = var.compute_resource_min_vcpus >= 0
+    error_message = "The var.compute_resource_min_vcpus should be positive."
+  }
 }
 
 variable "compute_resource_max_vcpus" {
   description = "The maximum number of EC2 vCPUs that an environment can reach."
   type        = number
   default     = 16
+
+  validation {
+    condition     = var.compute_resource_max_vcpus >= 0
+    error_message = "The var.compute_resource_max_vcpus should be positive."
+  }
 }
 
 variable "compute_resource_type" {
@@ -150,7 +152,7 @@ variable "compute_resource_ec2_key_pair" {
 }
 
 variable "compute_resource_allocation_strategy" {
-  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT. Defaults to BEST_FIT. See AWS docs for details."
+  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT."
   type        = string
   default     = "BEST_FIT_PROGRESSIVE"
 
@@ -183,7 +185,7 @@ variable "compute_resource_spot_iam_fleet_role" {
 }
 
 variable "compute_resource_launch_template" {
-  description = "Launch template configuration for compute environment"
+  description = "Launch template configuration for compute environment format: list(object({ launch_template_id = string, version = optional(number) }))"
   # When the feature "optional type attributes" (https://www.terraform.io/docs/language/expressions/type-constraints.html#experimental-optional-object-type-attributes)
   # will be fully released, we will be able to validate the type with:
   # type = list(object({
@@ -204,10 +206,16 @@ variable "compute_resource_desired_vcpus" {
   description = "The desired number of EC2 vCPUS in the compute environment."
   type        = number
   default     = null
+
+  validation {
+    condition     = var.compute_resource_desired_vcpus == null || try(var.compute_resource_desired_vcpus >= 0, false)
+    error_message = "The var.compute_resource_desired_vcpus should be positive if not null."
+  }
 }
 
 variable "compute_resource_tags" {
   description = "Tags to be used for compute resources (merged with `var.tags`)."
+  type        = map(string)
   default     = {}
 }
 
@@ -243,10 +251,16 @@ variable "queue_priority" {
   description = "The priority of the job queue. Job queues with a higher priority are evaluated first when associated with the same compute environment."
   type        = number
   default     = 1
+
+  validation {
+    condition     = var.queue_priority == null || try(var.queue_priority >= 0 && var.queue_priority <= 1000, false)
+    error_message = "The var.queue_priority must be between 0 and 1000."
+  }
 }
 
 variable "queue_tags" {
   description = "Tags to be used for the job queue (merged with `var.tags`)."
+  type        = map(string)
   default     = {}
 }
 
@@ -263,7 +277,12 @@ variable "ecs_instance_profile_create" {
 variable "ecs_instance_profile_arn" {
   description = "(Needed if service_role_create == false) The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment."
   type        = string
-  default     = "BatchEcsInstanceRole"
+  default     = null
+
+  validation {
+    condition     = var.ecs_instance_profile_arn == null || can(regex("^arn:aws:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.ecs_instance_profile_arn))
+    error_message = "The var.ecs_instance_profile_arn must match “^arn:aws:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$”."
+  }
 }
 
 variable "ecs_instance_role_name" {
@@ -300,6 +319,7 @@ variable "ecs_instance_role_path" {
 
 variable "ecs_instance_role_tags" {
   description = "Tags to be used for the Instance Profile Role (merged with `var.tags`)."
+  type        = map(string)
   default     = {}
 }
 
@@ -339,6 +359,11 @@ variable "service_role_name" {
   description = "Instance role name for ECS instances"
   type        = string
   default     = "BatchServiceRoleEC2"
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_name))
+    error_message = "The var.service_role_name mus match ^[a-zA-Z0-9\\+=,\\.@_-$]{1,64}."
+  }
 }
 
 variable "service_role_description" {
@@ -367,6 +392,11 @@ variable "service_role_arn" {
   description = "(Needed if service_role_create == false) Full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf."
   type        = string
   default     = null
+
+  validation {
+    condition     = var.service_role_arn == null || can(regex("^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_arn))
+    error_message = "The var.service_role_arn should match ^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
+  }
 }
 
 #####
@@ -445,10 +475,16 @@ variable "instance_sg_name" {
   description = "Instance role name for ECS instances"
   type        = string
   default     = "BatchServiceRole"
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9 \\._:\\/\\(\\)\\#,\\[\\]\\+=&;{}!\\$\\*-]{1,255}$", var.instance_sg_name))
+    error_message = "The var.instance_sg_name should match “^[a-zA-Z0-9 \\._:\\/\\(\\)\\#,\\[\\]\\+=&;{}!\\$\\*-]{1,255}$”."
+  }
 }
 
 variable "instance_sg_tags" {
   description = "Tags to be used for the instances SG (merged with `var.tags`)."
+  type        = map(string)
   default     = {}
 }
 
