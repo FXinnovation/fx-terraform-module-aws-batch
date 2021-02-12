@@ -41,8 +41,8 @@ variable "compute_environment_name_prefix" {
   default     = null
 
   validation {
-    condition     = var.compute_environment_name_prefix == null || can(regex("^[a-zA-Z0-9_-]*$", var.compute_environment_name_prefix))
-    error_message = "The var.compute_environment_name_prefix should match “^[a-zA-Z0-9_-]*$”."
+    condition     = var.compute_environment_name_prefix == null || can(regex("^[0-9a-zA-Z]{1}[0-9a-zA-Z_-]{0,101}$", var.compute_environment_name_prefix))
+    error_message = "The var.compute_environment_name_prefix should match “^[0-9a-zA-Z]{1}[0-9a-zA-Z_-]{0,101}$”."
   }
 }
 
