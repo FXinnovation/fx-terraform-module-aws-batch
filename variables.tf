@@ -70,8 +70,8 @@ variable "compute_environment_arns" {
   default     = []
 
   validation {
-    condition     = can([for s in var.compute_environment_arns : regex("^arn:aws:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$", s)])
-    error_message = "Each entries of var.compute_environment_arns should match ^arn:aws:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$."
+    condition     = can([for s in var.compute_environment_arns : regex("^arn:aws[a-zA-Z0-9-]*:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$", s)])
+    error_message = "Each entries of var.compute_environment_arns should match ^arn:aws[a-zA-Z0-9-]*:batch:[a-zA-Z0-9-]*:[0-9]{12}:compute-environment/[a-zA-Z0-9_-]*$."
   }
 }
 
@@ -179,8 +179,8 @@ variable "compute_resource_spot_iam_fleet_role" {
   default     = null
 
   validation {
-    condition     = var.compute_resource_spot_iam_fleet_role == null || can(regex("^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.compute_resource_spot_iam_fleet_role))
-    error_message = "The var.compute_resource_spot_iam_fleet_role should match ^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
+    condition     = var.compute_resource_spot_iam_fleet_role == null || can(regex("^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.compute_resource_spot_iam_fleet_role))
+    error_message = "The var.compute_resource_spot_iam_fleet_role should match ^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
   }
 }
 
@@ -275,8 +275,8 @@ variable "ecs_instance_profile_arn" {
   default     = null
 
   validation {
-    condition     = var.ecs_instance_profile_arn == null || can(regex("^arn:aws:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.ecs_instance_profile_arn))
-    error_message = "The var.ecs_instance_profile_arn must match “^arn:aws:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$”."
+    condition     = var.ecs_instance_profile_arn == null || can(regex("^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.ecs_instance_profile_arn))
+    error_message = "The var.ecs_instance_profile_arn must match “^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:instance-profile/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$”."
   }
 }
 
@@ -389,8 +389,8 @@ variable "service_role_arn" {
   default     = null
 
   validation {
-    condition     = var.service_role_arn == null || can(regex("^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_arn))
-    error_message = "The var.service_role_arn should match ^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
+    condition     = var.service_role_arn == null || can(regex("^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_arn))
+    error_message = "The var.service_role_arn should match ^arn:aws:iam[a-zA-Z0-9-]*::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
   }
 }
 
