@@ -236,15 +236,10 @@ variable "queue_name" {
   }
 }
 
-variable "queue_state" {
-  description = "The state of the job queue. Must be one of: ENABLED or DISABLED"
-  type        = string
-  default     = "ENABLED"
-
-  validation {
-    condition     = contains(["ENABLED", "DISABLED"], var.queue_state)
-    error_message = "The var.v must be ENABLED or DISABLED."
-  }
+variable "queue_enabled" {
+  description = "Whether or not to enable job queue (toggles aws_batch_job_queue.state ENABLED/DISABLED).)"
+  type        = bool
+  default     = true
 }
 
 variable "queue_priority" {

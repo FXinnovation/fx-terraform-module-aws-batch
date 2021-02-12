@@ -77,7 +77,7 @@ resource "aws_batch_job_queue" "this" {
   count = var.queue_create ? 1 : 0
 
   name     = format("%s%s", var.prefix, var.queue_name)
-  state    = var.queue_state
+  state    = var.queue_enabled ? "ENABLED" : "DISABLED"
   priority = var.queue_priority
 
   compute_environments = concat(

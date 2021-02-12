@@ -54,9 +54,9 @@ Terraform module to deploy Batch on AWS.
 | instance\_sg\_tags | Tags to be used for the instances SG (merged with `var.tags`). | `map(string)` | `{}` | no |
 | prefix | Prefix to be added to with all resource's names of the module. Prefix is mainly used for tests and should remain empty in normal circumstances. | `string` | `""` | no |
 | queue\_create | Whether or not to create a job queue for Batch | `bool` | `true` | no |
+| queue\_enabled | Whether or not to enable job queue (toggles aws\_batch\_job\_queue.state ENABLED/DISABLED).) | `bool` | `true` | no |
 | queue\_name | Specifies the name of the job queue. | `string` | `"job-queue"` | no |
 | queue\_priority | The priority of the job queue. Job queues with a higher priority are evaluated first when associated with the same compute environment. | `number` | `1` | no |
-| queue\_state | The state of the job queue. Must be one of: ENABLED or DISABLED | `string` | `"ENABLED"` | no |
 | queue\_tags | Tags to be used for the job queue (merged with `var.tags`). | `map(string)` | `{}` | no |
 | service\_linked\_role\_spot\_create | Whether or not to create service role for Spot | `bool` | `true` | no |
 | service\_linked\_role\_spot\_description | Description attached to the service linked role | `string` | `"Spot service linked role"` | no |
