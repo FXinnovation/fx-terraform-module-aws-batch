@@ -297,8 +297,8 @@ variable "ecs_instance_role_description" {
   default     = "Instance Profile Role For Batch Instances"
 
   validation {
-    condition     = can(regex("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$", var.ecs_instance_role_description))
-    error_message = "The var.ecs_instance_role_description must match “^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$”."
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.ecs_instance_role_description))
+    error_message = "The var.ecs_instance_role_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
   }
 }
 
@@ -367,8 +367,8 @@ variable "service_role_description" {
   default     = "Service Role For Batch"
 
   validation {
-    condition     = can(regex("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$", var.service_role_description))
-    error_message = "The var.service_role_description must match “^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$”."
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.service_role_description))
+    error_message = "The var.service_role_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
   }
 }
 
@@ -416,8 +416,8 @@ variable "service_role_spot_description" {
   default     = "Service Role Spot For Batch"
 
   validation {
-    condition     = can(regex("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$", var.service_role_spot_description))
-    error_message = "The var.service_role_spot_description must match “^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{0,1000}$”."
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.service_role_spot_description))
+    error_message = "The var.service_role_spot_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
   }
 }
 
@@ -448,12 +448,23 @@ variable "service_linked_role_spot_description" {
   description = "Description attached to the service linked role"
   type        = string
   default     = "Spot service linked role"
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.service_linked_role_spot_description))
+    error_message = "The var.service_role_spot_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
+  }
 }
 
 variable "service_linked_role_spotfleet_description" {
   description = "Description attached to the service linked role"
   type        = string
   default     = "Spotfleet service linked role"
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.service_linked_role_spotfleet_description))
+    error_message = "The var.service_role_spot_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
+  }
+
 }
 
 #####
