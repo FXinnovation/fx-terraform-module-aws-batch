@@ -77,44 +77,44 @@ Terraform module to deploy Batch on AWS.
 
 | Name | Description |
 |------|-------------|
-| aws\_batch\_compute\_environment\_arn | The Amazon Resource Name (ARN) of the compute environment. |
-| aws\_batch\_compute\_environment\_ecs\_cluster\_arn | The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. |
-| aws\_batch\_compute\_environment\_status | The current status of the compute environment (for example, CREATING or VALID). |
-| aws\_batch\_compute\_environment\_status\_reason | A short, human-readable string to provide additional details about the current status of the compute environment. |
-| aws\_batch\_job\_queue\_this\_arn | The Amazon Resource Name of the job queue. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_arn | The ARN assigned by AWS to the instance profile. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_create\_date | The creation timestamp of the instance profile. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_id | The instance profile's ID. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_name | The instance profile's name. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_path | The path of the instance profile in IAM. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_role | The role assigned to the instance profile. |
-| aws\_iam\_instance\_profile\_ecs\_instance\_role\_unique\_id | The unique ID assigned by AWS. |
-| aws\_iam\_role\_ecs\_instance\_role\_arn | The Amazon Resource Name (ARN) specifying the role. |
-| aws\_iam\_role\_ecs\_instance\_role\_create\_date | The creation date of the IAM role. |
-| aws\_iam\_role\_ecs\_instance\_role\_description | The description of the role. |
-| aws\_iam\_role\_ecs\_instance\_role\_id | The name of the role. |
-| aws\_iam\_role\_ecs\_instance\_role\_name | The name of the role. |
-| aws\_iam\_role\_ecs\_instance\_role\_unique\_id | The stable and unique string identifying the role. |
-| aws\_iam\_role\_service\_role\_arn | The Amazon Resource Name (ARN) specifying the role. |
-| aws\_iam\_role\_service\_role\_create\_date | The creation date of the IAM role. |
-| aws\_iam\_role\_service\_role\_description | The description of the role. |
-| aws\_iam\_role\_service\_role\_id | The name of the role. |
-| aws\_iam\_role\_service\_role\_name | The name of the role. |
-| aws\_iam\_role\_service\_role\_spot\_arn | The Amazon Resource Name (ARN) specifying the role. |
-| aws\_iam\_role\_service\_role\_spot\_create\_date | The creation date of the IAM role. |
-| aws\_iam\_role\_service\_role\_spot\_description | The description of the role. |
-| aws\_iam\_role\_service\_role\_spot\_id | The name of the role. |
-| aws\_iam\_role\_service\_role\_spot\_name | The name of the role. |
-| aws\_iam\_role\_service\_role\_spot\_unique\_id | The stable and unique string identifying the role. |
-| aws\_iam\_role\_service\_role\_unique\_id | The stable and unique string identifying the role. |
-| aws\_security\_group\_instances\_arn | The ARN of the security group. |
-| aws\_security\_group\_instances\_description | The description of the security group. |
-| aws\_security\_group\_instances\_egress | The egress rules. |
-| aws\_security\_group\_instances\_id | The ID of the security group. |
-| aws\_security\_group\_instances\_ingress | The ingress rules. |
-| aws\_security\_group\_instances\_name | The name of the security group. |
-| aws\_security\_group\_instances\_owner\_id | The owner ID. |
-| aws\_security\_group\_instances\_vpc\_id | The VPC ID. |
+| batch\_compute\_environment\_arn | The Amazon Resource Name (ARN) of the compute environment. |
+| batch\_compute\_environment\_ecs\_cluster\_arn | The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. |
+| batch\_compute\_environment\_status | The current status of the compute environment (for example, CREATING or VALID). |
+| batch\_compute\_environment\_status\_reason | A short, human-readable string to provide additional details about the current status of the compute environment. |
+| batch\_job\_queue\_this\_arn | The Amazon Resource Name of the job queue. |
+| iam\_instance\_profile\_ecs\_instance\_role\_arn | The ARN assigned by AWS to the instance profile. |
+| iam\_instance\_profile\_ecs\_instance\_role\_create\_date | The creation timestamp of the instance profile. |
+| iam\_instance\_profile\_ecs\_instance\_role\_id | The instance profile's ID. |
+| iam\_instance\_profile\_ecs\_instance\_role\_name | The instance profile's name. |
+| iam\_instance\_profile\_ecs\_instance\_role\_path | The path of the instance profile in IAM. |
+| iam\_instance\_profile\_ecs\_instance\_role\_role | The role assigned to the instance profile. |
+| iam\_instance\_profile\_ecs\_instance\_role\_unique\_id | The unique ID assigned by AWS. |
+| iam\_role\_ecs\_instance\_role\_arn | The Amazon Resource Name (ARN) specifying the role. |
+| iam\_role\_ecs\_instance\_role\_create\_date | The creation date of the IAM role. |
+| iam\_role\_ecs\_instance\_role\_description | The description of the role. |
+| iam\_role\_ecs\_instance\_role\_id | The name of the role. |
+| iam\_role\_ecs\_instance\_role\_name | The name of the role. |
+| iam\_role\_ecs\_instance\_role\_unique\_id | The stable and unique string identifying the role. |
+| iam\_role\_service\_role\_arn | The Amazon Resource Name (ARN) specifying the role. |
+| iam\_role\_service\_role\_create\_date | The creation date of the IAM role. |
+| iam\_role\_service\_role\_description | The description of the role. |
+| iam\_role\_service\_role\_id | The name of the role. |
+| iam\_role\_service\_role\_name | The name of the role. |
+| iam\_role\_service\_role\_spot\_arn | The Amazon Resource Name (ARN) specifying the role. |
+| iam\_role\_service\_role\_spot\_create\_date | The creation date of the IAM role. |
+| iam\_role\_service\_role\_spot\_description | The description of the role. |
+| iam\_role\_service\_role\_spot\_id | The name of the role. |
+| iam\_role\_service\_role\_spot\_name | The name of the role. |
+| iam\_role\_service\_role\_spot\_unique\_id | The stable and unique string identifying the role. |
+| iam\_role\_service\_role\_unique\_id | The stable and unique string identifying the role. |
+| security\_group\_instances\_arn | The ARN of the security group. |
+| security\_group\_instances\_description | The description of the security group. |
+| security\_group\_instances\_egress | The egress rules. |
+| security\_group\_instances\_id | The ID of the security group. |
+| security\_group\_instances\_ingress | The ingress rules. |
+| security\_group\_instances\_name | The name of the security group. |
+| security\_group\_instances\_owner\_id | The owner ID. |
+| security\_group\_instances\_vpc\_id | The VPC ID. |
 | service\_linked\_role\_spot\_arn | The Amazon Resource Name (ARN) specifying the role. |
 | service\_linked\_role\_spot\_id | The Amazon Resource Name (ARN) of the role. |
 | service\_linked\_role\_spot\_name | The name of the role. |

@@ -69,14 +69,14 @@ module "extraenvspot" {
   compute_resource_bid_percentage = 0
 
   service_role_spot_create             = false
-  compute_resource_spot_iam_fleet_role = module.default.aws_iam_role_service_role_spot_arn
+  compute_resource_spot_iam_fleet_role = module.default.iam_role_service_role_spot_arn
   compute_resource_image_id            = data.aws_ami.amazon-linux-2-ami.id
   ecs_instance_profile_create          = false
-  ecs_instance_profile_arn             = module.default.aws_iam_instance_profile_ecs_instance_role_arn
+  ecs_instance_profile_arn             = module.default.iam_instance_profile_ecs_instance_role_arn
   service_role_create                  = false
-  service_role_arn                     = module.default.aws_iam_role_service_role_arn
+  service_role_arn                     = module.default.iam_role_service_role_arn
   instance_sg_create                   = false
-  instance_sg_ids                      = [module.default.aws_security_group_instances_id]
+  instance_sg_ids                      = [module.default.security_group_instances_id]
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
   tags                                 = local.tags
@@ -92,17 +92,17 @@ module "extrajqueue" {
 
   compute_environment_create = false
   compute_environment_arns = [
-    module.default.aws_batch_compute_environment_arn,
-    module.extraenvspot.aws_batch_compute_environment_arn,
+    module.default.batch_compute_environment_arn,
+    module.extraenvspot.batch_compute_environment_arn,
   ]
   service_role_spot_create             = false
-  compute_resource_spot_iam_fleet_role = module.default.aws_iam_role_service_role_spot_arn
+  compute_resource_spot_iam_fleet_role = module.default.iam_role_service_role_spot_arn
   ecs_instance_profile_create          = false
-  ecs_instance_profile_arn             = module.default.aws_iam_instance_profile_ecs_instance_role_arn
+  ecs_instance_profile_arn             = module.default.iam_instance_profile_ecs_instance_role_arn
   service_role_create                  = false
-  service_role_arn                     = module.default.aws_iam_role_service_role_arn
+  service_role_arn                     = module.default.iam_role_service_role_arn
   instance_sg_create                   = false
-  instance_sg_ids                      = [module.default.aws_security_group_instances_id]
+  instance_sg_ids                      = [module.default.security_group_instances_id]
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
   tags                                 = local.tags
