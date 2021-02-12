@@ -19,9 +19,14 @@ resource "random_string" "extrajqueue" {
   number  = false
 }
 
+resource "tls_private_key" "this" {
+  algorithm = "RSA"
+  rsa_bits  = "2048"
+}
+
 resource "aws_key_pair" "this" {
-  key_name   = "tft${random_string.default.result}"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd9y7Vs3trccT98Z/zW42SxLmSTlO2dsOgOg+bJB4JD6jfFagwHMd2VeD6idVB0FML52GePo537+SCn9Lhhy4tnJMc7Kx/5WKacvaRPFK8AYvl2JQ6RHQtXnxLwZNAeB2LRi15NTvh3f9jx/o0MKXKWyFdK5MEixzbFiBtipOiO138AIk3d4YTFdQHDjN2DDk0WN2+aMUM27LXHgypdWMZvtKlyOpIR7Kydx7QghXiVj7d/9q9KOKjZFDjVbfSAC27oJ8c1MIHJc7jLCkNhrmg0KJi9oVehfcD5xVG9LL7vLJ/ifMgFgVRM04XgKGYcin0tXTA2jjBAkZL/qwYkcQt0pMc8VC/e4/QL8oKY0VDBzWH2v423o5tu+EWjVozVd6ekoyG9/1njhxZQ6wA097R/ICEs/jOWGU4+N/YkAqECpeDFi3MMYs1ZaU71UbAddcnAR6xNiNnH56fu42dzSVgQDtYuZAhh86o6zp9F0IDGfLkRHE5M/RMgQgsDF38ls8= email@example.com"
+  key_name_prefix = "tft${random_string.default.result}"
+  public_key      = tls_private_key.this.public_key_openssh
 }
 
 resource "aws_launch_template" "this" {
