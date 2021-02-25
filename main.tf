@@ -43,7 +43,10 @@ resource "aws_batch_compute_environment" "this" {
       }
     }
 
-    spot_iam_fleet_role = var.compute_resource_spot_iam_fleet_role != null ? var.compute_resource_spot_iam_fleet_role : (var.service_role_spot_create ? aws_iam_role.service_role_spot.0.arn : null)
+    # only needed for BEST_FIT (default)
+    spot_iam_fleet_role = (var.compute_resource_allocation_strategy == "BEST_FIT" || var.compute_resource_allocation_strategy == null) ? (
+      var.compute_resource_spot_iam_fleet_role != null ? var.compute_resource_spot_iam_fleet_role : (var.service_role_spot_create ? aws_iam_role.service_role_spot.0.arn : null)
+    ) : null
 
     tags = merge(
       local.tags,
