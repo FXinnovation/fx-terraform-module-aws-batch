@@ -16,6 +16,24 @@ Terraform module to deploy Batch on AWS.
 |------|---------|
 | aws | >= 3.0 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_batch_compute_environment](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/batch_compute_environment) |
+| [aws_batch_job_queue](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/batch_job_queue) |
+| [aws_iam_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/iam_instance_profile) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/iam_policy_document) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/iam_role_policy_attachment) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/iam_role) |
+| [aws_iam_service_linked_role](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/iam_service_linked_role) |
+| [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/security_group_rule) |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/security_group) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -125,5 +143,4 @@ Terraform module to deploy Batch on AWS.
 | service\_linked\_role\_spotfleet\_name | The name of the role. |
 | service\_linked\_role\_spotfleet\_path | The path of the role. |
 | service\_linked\_role\_spotfleet\_unique\_id | The stable and unique string identifying the role. |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
