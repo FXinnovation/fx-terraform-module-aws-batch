@@ -6,10 +6,14 @@ data "aws_subnet_ids" "this" {
   vpc_id = data.aws_vpc.this.id
 }
 
-data "aws_ami" "amazon-linux-2-ami" {
+data "aws_ami" "ecs" {
   most_recent = true
   owners      = ["amazon"]
-  name_regex  = "amzn2-ami-hvm*"
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-*-amazon-ecs-optimized"]
+  }
 
   filter {
     name   = "architecture"

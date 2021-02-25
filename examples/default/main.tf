@@ -32,7 +32,7 @@ resource "aws_key_pair" "this" {
 resource "aws_launch_template" "this" {
   name_prefix   = "tftlc"
   instance_type = "c5.large"
-  image_id      = data.aws_ami.amazon-linux-2-ami.id
+  image_id      = data.aws_ami.ecs.id
 }
 
 locals {
@@ -66,11 +66,11 @@ module "extraenvspot" {
   compute_resource_subnet_ids = data.aws_subnet_ids.this.ids
 
   compute_resource_type           = "SPOT"
-  compute_resource_bid_percentage = 0
+  compute_resource_bid_percentage = 100
 
   service_role_spot_create             = false
   compute_resource_spot_iam_fleet_role = module.default.iam_role_service_role_spot_arn
-  compute_resource_image_id            = data.aws_ami.amazon-linux-2-ami.id
+  compute_resource_image_id            = data.aws_ami.ecs.id
   ecs_instance_profile_create          = false
   ecs_instance_profile_arn             = module.default.iam_instance_profile_ecs_instance_role_arn
   service_role_create                  = false
@@ -80,6 +80,10 @@ module "extraenvspot" {
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
   tags                                 = local.tags
+
+  depends_on = [
+    module.default
+  ]
 }
 
 # In addition to the job_queue created by extraenvspot module, add a new one with this 2 compute environents
@@ -91,6 +95,7 @@ module "extrajqueue" {
   compute_resource_subnet_ids = data.aws_subnet_ids.this.ids
 
   compute_environment_create = false
+  # Provide non-spot base with overflow on spot
   compute_environment_arns = [
     module.default.batch_compute_environment_arn,
     module.extraenvspot.batch_compute_environment_arn,
@@ -106,4 +111,9 @@ module "extrajqueue" {
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
   tags                                 = local.tags
+
+  depends_on = [
+    module.default,
+    module.extraenvspot,
+  ]
 }

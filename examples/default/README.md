@@ -25,6 +25,26 @@
 | random | >= 3.0 |
 | tls | >= 3.0 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| default | ../../ |  |
+| extraenvspot | ../../ |  |
+| extrajqueue | ../../ |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/ami) |
+| [aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/key_pair) |
+| [aws_launch_template](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/launch_template) |
+| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/subnet_ids) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/vpc) |
+| [random_string](https://registry.terraform.io/providers/hashicorp/random/3.0/docs/resources/string) |
+| [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.0/docs/resources/private_key) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -180,5 +200,4 @@
 | extrajqueue\_service\_linked\_role\_spotfleet\_name | n/a |
 | extrajqueue\_service\_linked\_role\_spotfleet\_path | n/a |
 | extrajqueue\_service\_linked\_role\_spotfleet\_unique\_id | n/a |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
