@@ -321,7 +321,7 @@ variable "ecs_instance_role_tags" {
 variable "ecs_instance_profile_name" {
   description = "The IAM profile's name for the EC2 instance (or launch template). If `var.ecs_instance_profile_create` is `true` and this is null, Terraform will assign a random, unique name. If `var.ecs_instance_profile_create` is `false` this value should be the name of an external IAM Instance Profile."
   type        = string
-  default     = "batch_ecs_instance_role"
+  default     = "BatchEcsInstanceRole"
 
   validation {
     condition     = var.ecs_instance_profile_name == null || can(regex("^[\\w+=,.@-]{1,128}$", var.ecs_instance_profile_name))
