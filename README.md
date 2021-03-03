@@ -87,7 +87,7 @@ No Modules.
 | service\_role\_path | Path in which to create the service role for Batch. Ignored if `var.service_role_create` is `false`. | `string` | `null` | no |
 | service\_role\_spot\_create | Whether or not to create service role for Spot | `bool` | `true` | no |
 | service\_role\_spot\_description | Description of the IAM Role to be used by the Batch. Ignored if `var.service_role_spot_create` is `false`. | `string` | `"Service Role Spot For Batch"` | no |
-| service\_role\_spot\_name | Instance role name for ECS instances | `string` | `"AmazonEC2SpotFleetRole"` | no |
+| service\_role\_spot\_name | Instance role name for ECS instances | `string` | `"AmazonEC2SpotFleetTaggingRole"` | no |
 | service\_role\_spot\_path | Path in which to create the service role for Batch. Ignored if `var.service_role_spot_create` is `false`. | `string` | `null` | no |
 | tags | Map of tags that will be applied on all resources. | `map(string)` | `{}` | no |
 

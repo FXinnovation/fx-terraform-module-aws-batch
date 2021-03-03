@@ -407,7 +407,7 @@ variable "service_role_spot_create" {
 variable "service_role_spot_name" {
   description = "Instance role name for ECS instances"
   type        = string
-  default     = "AmazonEC2SpotFleetRole"
+  default     = "AmazonEC2SpotFleetTaggingRole"
 }
 
 variable "service_role_spot_description" {
