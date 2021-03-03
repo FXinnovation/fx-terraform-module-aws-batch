@@ -232,7 +232,7 @@ variable "queue_name" {
 
   validation {
     condition     = var.queue_name == null || can(regex("^[a-zA-Z0-9_-]{1,128}$", var.queue_name))
-    error_message = "The var.ecs_instance_role_name must match “^[a-zA-Z0-9_-]{1,128}$”."
+    error_message = "The var.queue_name must match “^[a-zA-Z0-9_-]{1,128}$”."
   }
 }
 
