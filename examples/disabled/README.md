@@ -20,6 +20,16 @@
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| disabled | ../../ |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -79,5 +89,4 @@ No provider.
 | service\_linked\_role\_spotfleet\_name | n/a |
 | service\_linked\_role\_spotfleet\_path | n/a |
 | service\_linked\_role\_spotfleet\_unique\_id | n/a |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -16,6 +16,24 @@ Terraform module to deploy Batch on AWS.
 |------|---------|
 | aws | >= 3.0 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_batch_compute_environment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_compute_environment) |
+| [aws_batch_job_queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue) |
+| [aws_iam_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
+| [aws_iam_service_linked_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_linked_role) |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) |
+| [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -42,7 +60,7 @@ Terraform module to deploy Batch on AWS.
 | compute\_resource\_type | The type of compute environment. Valid items are EC2 or SPOT. | `string` | `"EC2"` | no |
 | ecs\_instance\_profile\_arn | (Needed if service\_role\_create == false) The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. | `string` | `null` | no |
 | ecs\_instance\_profile\_create | Whether or not to create instance profile for ECS instances | `bool` | `true` | no |
-| ecs\_instance\_profile\_name | The IAM profile's name for the EC2 instance (or launch template). If `var.ecs_instance_profile_create` is `true` and this is null, Terraform will assign a random, unique name. If `var.ecs_instance_profile_create` is `false` this value should be the name of an external IAM Instance Profile. | `string` | `"batch_ecs_instance_role"` | no |
+| ecs\_instance\_profile\_name | The IAM profile's name for the EC2 instance (or launch template). If `var.ecs_instance_profile_create` is `true` and this is null, Terraform will assign a random, unique name. If `var.ecs_instance_profile_create` is `false` this value should be the name of an external IAM Instance Profile. | `string` | `"BatchEcsInstanceRole"` | no |
 | ecs\_instance\_profile\_path | Path in which to create the Instance Profile for the EC2 instance (or launch template). Instance Profile IAM Role will share the same path. Ignored if `var.ecs_instance_profile_create` is `false`. | `string` | `null` | no |
 | ecs\_instance\_role\_description | Description of the IAM Role to be used by the Instance Profile. Ignored if `var.ecs_instance_profile_create` is `false`. | `string` | `"Instance Profile Role For Batch Instances"` | no |
 | ecs\_instance\_role\_name | Name of the IAM Role to be used by the Instance Profile. If null, Terraform will assign a random, unique name. Ignored if `var.ecs_instance_profile_create` is `false`. | `string` | `"BatchEcsInstanceRole"` | no |
@@ -69,7 +87,7 @@ Terraform module to deploy Batch on AWS.
 | service\_role\_path | Path in which to create the service role for Batch. Ignored if `var.service_role_create` is `false`. | `string` | `null` | no |
 | service\_role\_spot\_create | Whether or not to create service role for Spot | `bool` | `true` | no |
 | service\_role\_spot\_description | Description of the IAM Role to be used by the Batch. Ignored if `var.service_role_spot_create` is `false`. | `string` | `"Service Role Spot For Batch"` | no |
-| service\_role\_spot\_name | Instance role name for ECS instances | `string` | `"AmazonEC2SpotFleetRole"` | no |
+| service\_role\_spot\_name | Instance role name for ECS instances | `string` | `"AmazonEC2SpotFleetTaggingRole"` | no |
 | service\_role\_spot\_path | Path in which to create the service role for Batch. Ignored if `var.service_role_spot_create` is `false`. | `string` | `null` | no |
 | tags | Map of tags that will be applied on all resources. | `map(string)` | `{}` | no |
 
@@ -125,5 +143,4 @@ Terraform module to deploy Batch on AWS.
 | service\_linked\_role\_spotfleet\_name | The name of the role. |
 | service\_linked\_role\_spotfleet\_path | The path of the role. |
 | service\_linked\_role\_spotfleet\_unique\_id | The stable and unique string identifying the role. |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
