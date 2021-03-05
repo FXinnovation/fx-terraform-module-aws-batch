@@ -210,5 +210,5 @@ resource "aws_security_group_rule" "instances_egress_open" {
   protocol          = "-1"
   to_port           = 0
   from_port         = 0
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }

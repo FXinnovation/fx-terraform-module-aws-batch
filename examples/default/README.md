@@ -37,13 +37,13 @@
 
 | Name |
 |------|
-| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/ami) |
-| [aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/key_pair) |
-| [aws_launch_template](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/resources/launch_template) |
-| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/subnet_ids) |
-| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/3.0/docs/data-sources/vpc) |
-| [random_string](https://registry.terraform.io/providers/hashicorp/random/3.0/docs/resources/string) |
-| [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.0/docs/resources/private_key) |
+| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) |
+| [aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) |
+| [aws_launch_template](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template) |
+| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
+| [random_string](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) |
+| [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) |
 
 ## Inputs
 
