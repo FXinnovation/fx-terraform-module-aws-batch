@@ -76,13 +76,13 @@ variable "compute_environment_arns" {
 }
 
 variable "compute_resource_instance_type" {
-  description = "A list of instance types that may be launched"
+  description = "The instances types that can be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to select instance types (from the C4, M4, and R4 instance families) that match the demand of your job queues."
   type        = list(string)
   default     = ["c5.large"]
 
   validation {
-    condition     = can([for s in var.compute_resource_instance_type : regex("^[a-z0-9]*\\.[a-z0-9]*$", s)])
-    error_message = "Each entries of var.compute_resource_instance_type should match ^[a-z0-9]*\\.[a-z0-9]*$."
+    condition     = can([for s in var.compute_resource_instance_type : regex("^([a-z0-9]*(\\.[0-9]*[a-z]+)?|optimal)$", s)])
+    error_message = "Each entries of var.compute_resource_instance_type should match ^([a-z0-9]*(\\.[0-9]*[a-z]+)?|optimal)$."
   }
 }
 

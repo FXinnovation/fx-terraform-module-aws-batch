@@ -31,6 +31,7 @@
 |------|--------|---------|
 | default | ../../ |  |
 | extraenvspot | ../../ |  |
+| extraenvspot2 | ../../ |  |
 | extrajqueue | ../../ |  |
 
 ## Resources

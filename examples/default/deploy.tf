@@ -12,6 +12,13 @@ resource "random_string" "extraenvspot" {
   number  = false
 }
 
+resource "random_string" "extraenvspot2" {
+  length  = 8
+  special = false
+  upper   = false
+  number  = false
+}
+
 resource "random_string" "extrajqueue" {
   length  = 8
   special = false
@@ -77,6 +84,37 @@ module "extraenvspot" {
   service_role_arn                     = module.default.iam_role_service_role_arn
   instance_sg_create                   = false
   instance_sg_ids                      = [module.default.security_group_instances_id]
+  compute_resource_instance_type       = ["c5"]
+  service_linked_role_spot_create      = false
+  service_linked_role_spotfleet_create = false
+  tags                                 = local.tags
+
+  depends_on = [
+    module.default
+  ]
+}
+
+# To test instance type OPTIMAL
+module "extraenvspot2" {
+  source = "../../"
+
+  prefix = format("tft%s", random_string.extraenvspot2.result)
+
+  compute_resource_subnet_ids = data.aws_subnet_ids.this.ids
+
+  compute_resource_type           = "SPOT"
+  compute_resource_bid_percentage = 100
+
+  service_role_spot_create             = false
+  compute_resource_spot_iam_fleet_role = module.default.iam_role_service_role_spot_arn
+  compute_resource_image_id            = data.aws_ami.ecs.id
+  ecs_instance_profile_create          = false
+  ecs_instance_profile_arn             = module.default.iam_instance_profile_ecs_instance_role_arn
+  service_role_create                  = false
+  service_role_arn                     = module.default.iam_role_service_role_arn
+  instance_sg_create                   = false
+  instance_sg_ids                      = [module.default.security_group_instances_id]
+  compute_resource_instance_type       = ["optimal"]
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
   tags                                 = local.tags

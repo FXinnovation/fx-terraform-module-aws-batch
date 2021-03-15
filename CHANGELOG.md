@@ -1,5 +1,12 @@
 # CHANGELOG
 
+0.2.0
+=====
+
+* feat: `var.compute_resource_instance_type` now allow families (ie: 'c5') and OPTIMAL
+* chore: bump pre-commit hooks
+* chore: remove 'disabled' example
+
 0.1.1
 =====
 
