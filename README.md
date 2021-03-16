@@ -50,7 +50,7 @@ No Modules.
 | compute\_resource\_desired\_vcpus | The desired number of EC2 vCPUS in the compute environment. | `number` | `null` | no |
 | compute\_resource\_ec2\_key\_pair | The EC2 key pair that is used for instances launched in the compute environment. | `string` | `null` | no |
 | compute\_resource\_image\_id | The Amazon Machine Image (AMI) ID used for instances launched in the compute environment | `string` | `null` | no |
-| compute\_resource\_instance\_type | A list of instance types that may be launched | `list(string)` | <pre>[<br>  "c5.large"<br>]</pre> | no |
+| compute\_resource\_instance\_type | The instances types that can be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to select instance types (from the C4, M4, and R4 instance families) that match the demand of your job queues. | `list(string)` | <pre>[<br>  "c5.large"<br>]</pre> | no |
 | compute\_resource\_launch\_template | Launch template configuration for compute environment format: list(object({ launch\_template\_id = string, version = optional(number) })) | `list(any)` | `[]` | no |
 | compute\_resource\_max\_vcpus | The maximum number of EC2 vCPUs that an environment can reach. | `number` | `16` | no |
 | compute\_resource\_min\_vcpus | The minimum number of EC2 vCPUs that an environment should maintain. | `number` | `0` | no |
