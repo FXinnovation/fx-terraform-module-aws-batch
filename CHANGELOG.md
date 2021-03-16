@@ -1,5 +1,10 @@
 # CHANGELOG
 
+0.2.1
+=====
+
+* fix: auto-select correct VPC for security group
+
 0.2.0
 =====
 
