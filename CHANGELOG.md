@@ -1,5 +1,10 @@
 # CHANGELOG
 
+0.2.2
+=====
+
+* fix: `var.instance_sg_name` description and default value
+
 0.2.1
 =====
 

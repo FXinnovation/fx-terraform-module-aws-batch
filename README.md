@@ -69,7 +69,7 @@ No Modules.
 | ecs\_instance\_role\_tags | Tags to be used for the Instance Profile Role (merged with `var.tags`). | `map(string)` | `{}` | no |
 | instance\_sg\_create | Whether or not to create Security Group for Batch instances | `bool` | `true` | no |
 | instance\_sg\_ids | (Needed if instance\_sg\_create == false) A list of EC2 security group that are associated with instances launched in the compute environment | `list(string)` | `[]` | no |
-| instance\_sg\_name | Instance role name for ECS instances | `string` | `"BatchServiceRole"` | no |
+| instance\_sg\_name | SG name for Batch instances | `string` | `"SG for Batch instances"` | no |
 | instance\_sg\_tags | Tags to be used for the instances SG (merged with `var.tags`). | `map(string)` | `{}` | no |
 | prefix | Prefix to be added to with all resource's names of the module. Prefix is mainly used for tests and should remain empty in normal circumstances. | `string` | `""` | no |
 | queue\_create | Whether or not to create a job queue for Batch | `bool` | `true` | no |

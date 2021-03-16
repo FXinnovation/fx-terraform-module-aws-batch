@@ -478,9 +478,9 @@ variable "instance_sg_create" {
 }
 
 variable "instance_sg_name" {
-  description = "Instance role name for ECS instances"
+  description = "SG name for Batch instances"
   type        = string
-  default     = "BatchServiceRole"
+  default     = "SG for Batch instances"
 
   validation {
     condition     = can(regex("^[a-zA-Z0-9 \\._:\\/\\(\\)\\#,\\[\\]\\+=&;{}!\\$\\*-]{1,255}$", var.instance_sg_name))
