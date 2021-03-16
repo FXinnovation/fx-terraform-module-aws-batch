@@ -81,8 +81,8 @@ variable "compute_resource_instance_type" {
   default     = ["c5.large"]
 
   validation {
-    condition     = can([for s in var.compute_resource_instance_type : regex("^([a-z0-9]*(\\.[0-9]*[a-z]+)?|optimal)$", s)])
-    error_message = "Each entries of var.compute_resource_instance_type should match ^([a-z0-9]*(\\.[0-9]*[a-z]+)?|optimal)$."
+    condition     = can([for s in var.compute_resource_instance_type : regex("^(([[:lower:]]+\\d[[:lower:]]*(\\.[a-z0-9]+)?)|optimal)$", s)])
+    error_message = "Each entries of var.compute_resource_instance_type should match ^(([[:lower:]]+\\d[[:lower:]]*(\\.[a-z0-9]+)?)|optimal)$."
   }
 }
 
