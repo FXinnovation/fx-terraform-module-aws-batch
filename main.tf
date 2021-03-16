@@ -193,6 +193,7 @@ resource "aws_security_group" "instances" {
 
   name        = format("%s%s", var.prefix, var.instance_sg_name)
   description = "For AWS Batch instances"
+  vpc_id      = data.aws_subnet.this.vpc_id
 
   tags = merge(
     local.tags,

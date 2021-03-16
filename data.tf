@@ -30,7 +30,6 @@ data "aws_iam_policy_document" "sts_batch" {
   }
 }
 
-
 data "aws_iam_policy_document" "sts_spotfleet" {
   statement {
     sid     = "1"
@@ -43,4 +42,9 @@ data "aws_iam_policy_document" "sts_spotfleet" {
       ]
     }
   }
+}
+
+# In order to find current VPC
+data "aws_subnet" "this" {
+  id = var.compute_resource_subnet_ids[0]
 }
