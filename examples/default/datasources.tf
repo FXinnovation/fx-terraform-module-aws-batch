@@ -26,6 +26,6 @@ data "aws_iam_policy_document" "s3_access" {
     sid     = "1"
     actions = ["s3:PutObject"]
 
-    resource = "arn:aws:s3:::fx_test_4563/123123421."
+    resources = ["arn:aws:s3:::fx_test_4563/123123421/"]
   }
 }
