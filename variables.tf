@@ -468,6 +468,43 @@ variable "service_linked_role_spotfleet_description" {
 }
 
 #####
+# Additional Service role policy
+#####
+
+variable "additional_service_policy_create" {
+  description = "Whether or not to create additional service policy for service role"
+  type        = bool
+  default     = false
+}
+
+variable "additional_service_policy_name" {
+  description = "Instance role name for ECS instances"
+  type        = string
+  default     = "BatchServiceRolePolicy"
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_name))
+    error_message = "The var.additional_service_policy_name mus match ^[a-zA-Z0-9\\+=,\\.@_-$]{1,64}."
+  }
+}
+
+variable "additional_service_role_policy" {
+  description = "provide additional service role policy json, values muste be provided as json in string eg: <<EOF statement {
+    sid     = \"1\"
+    actions = [\"sts:AssumeRole\"]
+
+    principals {
+      type = \"Service\"
+      identifiers = [
+        \"spotfleet.amazonaws.com\"
+      ]
+    }
+  }
+  EOF "
+  type        = string
+  default     = ""  
+}
+
 # Security Group
 #####
 
