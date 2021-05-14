@@ -483,26 +483,15 @@ variable "additional_service_policy_name" {
   default     = "BatchServiceRolePolicy"
 
   validation {
-    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.service_role_name))
+    condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_-]{1,64}$", var.additional_service_policy_name))
     error_message = "The var.additional_service_policy_name mus match ^[a-zA-Z0-9\\+=,\\.@_-$]{1,64}."
   }
 }
 
 variable "additional_service_role_policy" {
-  description = "provide additional service role policy json, values muste be provided as json in string eg: <<EOF statement {
-    sid     = \"1\"
-    actions = [\"sts:AssumeRole\"]
-
-    principals {
-      type = \"Service\"
-      identifiers = [
-        \"spotfleet.amazonaws.com\"
-      ]
-    }
-  }
-  EOF "
+  description = "provide additional service role policy json, values muste be provided as json in string"
   type        = string
-  default     = ""  
+  default     = ""
 }
 
 # Security Group

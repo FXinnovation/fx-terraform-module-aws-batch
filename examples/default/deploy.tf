@@ -170,7 +170,7 @@ module "additionalpolicy" {
   }]
   service_linked_role_spot_create      = false
   service_linked_role_spotfleet_create = false
-  additional_service_policy_create = true
-  additional_service_role_policy = data.aws_iam_policy_document.s3_access.*.json[0]
+  additional_service_policy_create     = true
+  additional_service_role_policy       = data.aws_iam_policy_document.s3_access.*.json[0]
   tags                                 = local.tags
 }

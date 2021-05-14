@@ -27,6 +27,7 @@ No Modules.
 | [aws_batch_compute_environment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_compute_environment) |
 | [aws_batch_job_queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue) |
 | [aws_iam_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
 | [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
 | [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
 | [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
@@ -39,6 +40,9 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| additional\_service\_policy\_create | Whether or not to create additional service policy for service role | `bool` | `false` | no |
+| additional\_service\_policy\_name | Instance role name for ECS instances | `string` | `"BatchServiceRolePolicy"` | no |
+| additional\_service\_role\_policy | provide additional service role policy json, values muste be provided as json in string | `string` | `""` | no |
 | compute\_environment\_arns | (Needed if compute\_environment\_create == false) Specifies the set of compute environments (ARNs) mapped to a job queue and their order. The position of the compute environments in the list will dictate the order. You can associate up to 3 compute environments with a job queue | `list(string)` | `[]` | no |
 | compute\_environment\_create | Whether or not to create a compute environment for Batch | `bool` | `true` | no |
 | compute\_environment\_enabled | Whether or not to enable the compute environment (toggles compute\_environment.state ENABLED/DISABLED.). | `bool` | `true` | no |

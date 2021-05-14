@@ -29,6 +29,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| additionalpolicy | ../../ |  |
 | default | ../../ |  |
 | extraenvspot | ../../ |  |
 | extraenvspot2 | ../../ |  |
@@ -39,6 +40,7 @@
 | Name |
 |------|
 | [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
 | [aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) |
 | [aws_launch_template](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template) |
 | [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) |
