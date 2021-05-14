@@ -161,7 +161,7 @@ resource "aws_iam_role_policy_attachment" "additional_service_role" {
   count = var.additional_service_policy_create ? 1 : 0
 
   role       = aws_iam_role.service_role.0.name
-  policy_arn = aws_iam_policy.service_role.*.arn
+  policy_arn = concat(aws_iam_role.service_role.*.arn, [""])[0]
 }
 
 #####
