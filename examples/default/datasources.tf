@@ -20,12 +20,3 @@ data "aws_ami" "ecs" {
     values = ["x86_64"]
   }
 }
-
-data "aws_iam_policy_document" "s3_access" {
-  statement {
-    sid     = "1"
-    actions = ["s3:PutObject"]
-
-    resources = ["arn:aws:s3:::fx_test_4563/123123421/"]
-  }
-}

@@ -471,8 +471,8 @@ variable "service_linked_role_spotfleet_description" {
 # Additional Service role policy
 #####
 
-variable "additional_iam_policy_arn" {
-  description = "add additional polocy arns to service role"
+variable "additional_iam_policy_arns" {
+  description = "add additional policy arns to service role"
   type        = list(string)
   default     = [""]
 }

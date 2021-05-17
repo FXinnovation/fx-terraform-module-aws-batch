@@ -39,7 +39,7 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| additional\_iam\_policy\_arn | add additional polocy arns to service role | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| additional\_iam\_policy\_arns | add additional policy arns to service role | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | compute\_environment\_arns | (Needed if compute\_environment\_create == false) Specifies the set of compute environments (ARNs) mapped to a job queue and their order. The position of the compute environments in the list will dictate the order. You can associate up to 3 compute environments with a job queue | `list(string)` | `[]` | no |
 | compute\_environment\_create | Whether or not to create a compute environment for Batch | `bool` | `true` | no |
 | compute\_environment\_enabled | Whether or not to enable the compute environment (toggles compute\_environment.state ENABLED/DISABLED.). | `bool` | `true` | no |
