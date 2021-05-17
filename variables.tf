@@ -468,6 +468,21 @@ variable "service_linked_role_spotfleet_description" {
 }
 
 #####
+# Additional Service role policy
+#####
+
+variable "additional_iam_policy_arns" {
+  description = "add additional policy arns to service role"
+  type        = list(string)
+  default     = [""]
+}
+
+variable "attach_additional_policy" {
+  description = "whether to add additional polices or not"
+  type        = bool
+  default     = false
+}
+
 # Security Group
 #####
 

@@ -150,6 +150,13 @@ resource "aws_iam_role_policy_attachment" "service_role" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole"
 }
 
+resource "aws_iam_role_policy_attachment" "additional_policy" {
+  count = var.service_role_create && var.attach_additional_policy ? length(var.additional_iam_policy_arns) : 0
+
+  role       = aws_iam_role.service_role[count.index].name
+  policy_arn = var.additional_iam_policy_arns[count.index]
+}
+
 #####
 # Service Role Spot
 #####
