@@ -160,7 +160,7 @@ module "extrajqueue" {
 module "additionalpolicy" {
   source = "../../"
 
-  prefix = format("tft%s", random_string.default.result)
+  prefix = format("tft%s", random_string.additionalpolicy.result)
 
   compute_resource_subnet_ids   = data.aws_subnet_ids.this.ids
   compute_resource_ec2_key_pair = aws_key_pair.this.key_name
