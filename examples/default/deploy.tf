@@ -155,3 +155,22 @@ module "extrajqueue" {
     module.extraenvspot,
   ]
 }
+
+# To test Additional Service policy
+module "additionalpolicy" {
+  source = "../../"
+
+  prefix = format("tft%s", random_string.default.result)
+
+  compute_resource_subnet_ids   = data.aws_subnet_ids.this.ids
+  compute_resource_ec2_key_pair = aws_key_pair.this.key_name
+  compute_resource_launch_template = [{
+    launch_template_id      = aws_launch_template.this.id,
+    launch_template_version = aws_launch_template.this.latest_version,
+  }]
+  service_linked_role_spot_create      = false
+  service_linked_role_spotfleet_create = false
+  attach_additional_policy             = true
+  additional_iam_policy_arns           = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]
+  tags                                 = local.tags
+}
