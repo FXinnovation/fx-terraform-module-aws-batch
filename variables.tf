@@ -477,6 +477,12 @@ variable "additional_iam_policy_arns" {
   default     = [""]
 }
 
+variable "attach_additional_policy" {
+  description = "whether to add additional polices or not"
+  type        = bool
+  default     = false
+}
+
 # Security Group
 #####
 
