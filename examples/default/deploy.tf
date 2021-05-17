@@ -26,6 +26,13 @@ resource "random_string" "extrajqueue" {
   number  = false
 }
 
+resource "random_string" "additionalpolicy" {
+  length  = 8
+  special = false
+  upper   = false
+  number  = false
+}
+
 resource "tls_private_key" "this" {
   algorithm = "RSA"
   rsa_bits  = "2048"
