@@ -155,22 +155,3 @@ module "extrajqueue" {
     module.extraenvspot,
   ]
 }
-
-# To test Additional Service policy
-module "additionalpolicy" {
-  source = "../../"
-
-  prefix = format("tft%s", random_string.default.result)
-
-  compute_resource_subnet_ids   = data.aws_subnet_ids.this.ids
-  compute_resource_ec2_key_pair = aws_key_pair.this.key_name
-  compute_resource_launch_template = [{
-    launch_template_id      = aws_launch_template.this.id,
-    launch_template_version = aws_launch_template.this.latest_version,
-  }]
-  service_linked_role_spot_create      = false
-  service_linked_role_spotfleet_create = false
-  additional_service_policy_create     = true
-  additional_service_role_policy       = data.aws_iam_policy_document.s3_access.*.json[0]
-  tags                                 = local.tags
-}

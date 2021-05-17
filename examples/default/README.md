@@ -29,7 +29,6 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| additionalpolicy | ../../ |  |
 | default | ../../ |  |
 | extraenvspot | ../../ |  |
 | extraenvspot2 | ../../ |  |

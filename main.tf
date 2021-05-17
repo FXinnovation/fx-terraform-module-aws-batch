@@ -150,18 +150,11 @@ resource "aws_iam_role_policy_attachment" "service_role" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole"
 }
 
-resource "aws_iam_policy" "service_role" {
-  count = var.additional_service_policy_create ? 1 : 0
-
-  name   = format("%s%s", var.prefix, var.additional_service_policy_name)
-  policy = var.additional_service_role_policy
-}
-
-resource "aws_iam_role_policy_attachment" "additional_service_role" {
-  count = var.additional_service_policy_create ? 1 : 0
+resource "aws_iam_role_policy_attachment" "additional_policy" {
+  count = length(var.additional_iam_policy_arn)
 
   role       = aws_iam_role.service_role.0.name
-  policy_arn = concat(aws_iam_role.service_role.*.arn, [""])[0]
+  policy_arn = var.additional_iam_policy_arn[count.index]
 }
 
 #####
