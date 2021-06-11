@@ -312,6 +312,12 @@ variable "ecs_instance_role_path" {
   }
 }
 
+variable "ecs_instance_profile_additional_iam_policy_arns" {
+  description = "List of IAM policies ARNs to attach to ECS Instance Profile"
+  type        = list(string)
+  default     = []
+}
+
 variable "ecs_instance_role_tags" {
   description = "Tags to be used for the Instance Profile Role (merged with `var.tags`)."
   type        = map(string)

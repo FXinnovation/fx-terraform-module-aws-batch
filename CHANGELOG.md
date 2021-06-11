@@ -1,5 +1,10 @@
 # CHANGELOG
 
+0.3.0
+=====
+
+* feat: Add possibility to attach additionnal policies in ECS instance profile
+
 0.2.2
 =====
 
