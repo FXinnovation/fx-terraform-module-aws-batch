@@ -130,6 +130,14 @@ resource "aws_iam_instance_profile" "ecs_instance_role" {
   role = aws_iam_role.ecs_instance_role.0.id
 }
 
+
+resource "aws_iam_role_policy_attachment" "ecs_additional_policy" {
+  count = var.ecs_instance_profile_create && length(var.ecs_instance_profile_additional_iam_policy_arns) > 0 ? length(var.ecs_instance_profile_additional_iam_policy_arns) : 0
+
+  role       = element(concat(aws_iam_role.ecs_instance_role.*.name, [""]), 0)
+  policy_arn = var.ecs_instance_profile_additional_iam_policy_arns[count.index]
+}
+
 #####
 # Service Role EC2
 #####

@@ -61,6 +61,7 @@ No Modules.
 | compute\_resource\_subnet\_ids | A list of VPC subnets into which the compute resources are launched | `list(string)` | n/a | yes |
 | compute\_resource\_tags | Tags to be used for compute resources (merged with `var.tags`). | `map(string)` | `{}` | no |
 | compute\_resource\_type | The type of compute environment. Valid items are EC2 or SPOT. | `string` | `"EC2"` | no |
+| ecs\_instance\_profile\_additional\_iam\_policy\_arns | List of IAM policies ARNs to attach to ECS Instance Profile | `list(string)` | `[]` | no |
 | ecs\_instance\_profile\_arn | (Needed if service\_role\_create == false) The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. | `string` | `null` | no |
 | ecs\_instance\_profile\_create | Whether or not to create instance profile for ECS instances | `bool` | `true` | no |
 | ecs\_instance\_profile\_name | The IAM profile's name for the EC2 instance (or launch template). If `var.ecs_instance_profile_create` is `true` and this is null, Terraform will assign a random, unique name. If `var.ecs_instance_profile_create` is `false` this value should be the name of an external IAM Instance Profile. | `string` | `"BatchEcsInstanceRole"` | no |
