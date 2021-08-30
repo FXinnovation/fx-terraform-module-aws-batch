@@ -1,4 +1,19 @@
-# CHANGELOG
+
+1.0.0 / 2021-08-30
+==================
+
+* (BREAKING) chore: pins pre-commit-hooks to v4.0.1.
+* chore: pins pre-commit-terraform to v1.50.0.
+* feat: add pre-commit-afcmf (v0.1.2).
+* chore: pins terraform to >= 0.14.
+* chore: pins aws provider to >= 3.5.
+* chore: bumps terraform + providers versions in example:
+  - pins terraform to >= 0.14.
+  - pins aws provider to >= 3.5.
+  - pins random provider to >= 3.1.
+  - pins tls provider to >= 3.1.
+* refactor: examples, providers and versions.tf.
+* refactor: get rid of providers.tf file in root module.
 
 0.3.0
 =====
