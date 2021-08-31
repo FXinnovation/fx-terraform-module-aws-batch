@@ -4,6 +4,7 @@ locals {
   }
 }
 
+
 #####
 # Batch
 #####
@@ -95,6 +96,7 @@ resource "aws_batch_job_queue" "this" {
   )
 }
 
+
 #####
 # Instance Profile
 #####
@@ -138,6 +140,7 @@ resource "aws_iam_role_policy_attachment" "ecs_additional_policy" {
   policy_arn = var.ecs_instance_profile_additional_iam_policy_arns[count.index]
 }
 
+
 #####
 # Service Role EC2
 #####
@@ -164,6 +167,7 @@ resource "aws_iam_role_policy_attachment" "additional_policy" {
   role       = aws_iam_role.service_role[count.index].name
   policy_arn = var.additional_iam_policy_arns[count.index]
 }
+
 
 #####
 # Service Role Spot
@@ -198,6 +202,7 @@ resource "aws_iam_service_linked_role" "spotfleet" {
   aws_service_name = "spotfleet.amazonaws.com"
   description      = var.service_linked_role_spotfleet_description
 }
+
 
 #####
 # Security Group

@@ -27,6 +27,7 @@ output "batch_job_queue_this_arn" {
   value       = concat(aws_batch_job_queue.this.*.arn, [""])[0]
 }
 
+
 #####
 # Instance Profile
 #####
@@ -97,6 +98,7 @@ output "iam_instance_profile_ecs_instance_role_unique_id" {
   value       = concat(aws_iam_instance_profile.ecs_instance_role.*.unique_id, [""])[0]
 }
 
+
 #####
 # Service Role EC2
 #####
@@ -130,6 +132,7 @@ output "iam_role_service_role_unique_id" {
   description = "The stable and unique string identifying the role."
   value       = concat(aws_iam_role.service_role.*.unique_id, [""])[0]
 }
+
 
 #####
 # Service Role Spot
@@ -214,6 +217,7 @@ output "service_linked_role_spotfleet_unique_id" {
   description = "The stable and unique string identifying the role."
   value       = concat(aws_iam_service_linked_role.spotfleet.*.unique_id, [""])[0]
 }
+
 
 #####
 # Security Group

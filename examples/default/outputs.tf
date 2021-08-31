@@ -194,6 +194,7 @@ output "default_security_group_instances_egress" {
   value = module.default.security_group_instances_egress
 }
 
+
 #####
 # Extra Env Spot
 #####
@@ -389,6 +390,7 @@ output "extraenvspot_security_group_instances_ingress" {
 output "extraenvspot_security_group_instances_egress" {
   value = module.extraenvspot.security_group_instances_egress
 }
+
 
 #####
 # Extra job queue
