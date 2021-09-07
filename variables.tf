@@ -14,6 +14,7 @@ variable "prefix" {
   }
 }
 
+
 #####
 # Batch
 #####
@@ -259,6 +260,7 @@ variable "queue_tags" {
   default     = {}
 }
 
+
 #####
 # Instance Profile
 #####
@@ -346,6 +348,7 @@ variable "ecs_instance_profile_path" {
   }
 }
 
+
 #####
 # Service Role EC2
 #####
@@ -399,6 +402,7 @@ variable "service_role_arn" {
     error_message = "The var.service_role_arn should match ^arn:aws:iam[a-zA-Z0-9-]*::[0-9]{12}:role/[a-zA-Z0-9\\+=,\\.@_-]{1,64}$."
   }
 }
+
 
 #####
 # Service Role Spot
@@ -470,8 +474,8 @@ variable "service_linked_role_spotfleet_description" {
     condition     = can(regex("^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$", var.service_linked_role_spotfleet_description))
     error_message = "The var.service_role_spot_description must match “^[a-zA-Z0-9\\+=,\\.@_ -]{0,1000}$”."
   }
-
 }
+
 
 #####
 # Additional Service role policy
@@ -489,6 +493,7 @@ variable "attach_additional_policy" {
   default     = false
 }
 
+#####
 # Security Group
 #####
 
