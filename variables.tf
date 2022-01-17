@@ -155,7 +155,7 @@ variable "compute_resource_ec2_key_pair" {
 variable "compute_resource_allocation_strategy" {
   description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT. `allocationStrategy` is not applicable for Fargate."
   type        = string
-  default     = null
+  default     = "BEST_FIT_PROGRESSIVE"
 
   validation {
     condition     = var.compute_resource_allocation_strategy == null || can(contains(["BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"], var.compute_resource_allocation_strategy))

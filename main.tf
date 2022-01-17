@@ -34,13 +34,13 @@ resource "aws_batch_compute_environment" "this" {
     )
 
     type                = var.compute_resource_type
-    allocation_strategy = var.compute_resource_allocation_strategy
-    bid_percentage      = var.compute_resource_bid_percentage
-    ec2_key_pair        = var.compute_resource_ec2_key_pair
-    image_id            = var.compute_resource_image_id
+    allocation_strategy = local.compute_resource_type_is_fargate == false ? var.compute_resource_allocation_strategy : null
+    bid_percentage      = local.compute_resource_type_is_fargate == false ? var.compute_resource_bid_percentage : null
+    ec2_key_pair        = local.compute_resource_type_is_fargate == false ? var.compute_resource_ec2_key_pair : null
+    image_id            = local.compute_resource_type_is_fargate == false ? var.compute_resource_image_id : null
 
     dynamic "launch_template" {
-      for_each = var.compute_resource_launch_template
+      for_each = local.compute_resource_type_is_fargate == false ? var.compute_resource_launch_template : toset([])
       content {
         launch_template_id = launch_template.value.launch_template_id
         version            = try(launch_template.value.version, null)
