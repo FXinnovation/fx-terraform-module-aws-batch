@@ -153,7 +153,7 @@ variable "compute_resource_ec2_key_pair" {
 }
 
 variable "compute_resource_allocation_strategy" {
-  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT. `allocationStrategy` is not applicable for Fargate."
+  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified."
   type        = string
   default     = "BEST_FIT_PROGRESSIVE"
 
@@ -409,7 +409,7 @@ variable "service_role_arn" {
 #####
 
 variable "service_role_spot_create" {
-  description = "Whether or not to create service role for Spot"
+  description = "Whether or not to create service role for Spot. Should be false for Fargate."
   type        = bool
   default     = true
 }
@@ -443,13 +443,13 @@ variable "service_role_spot_path" {
 }
 
 variable "service_linked_role_spot_create" {
-  description = "Whether or not to create service role for Spot"
+  description = "Whether or not to create service role for Spot. Should be false for Fargate."
   type        = bool
   default     = true
 }
 
 variable "service_linked_role_spotfleet_create" {
-  description = "Whether or not to create service role for Spot"
+  description = "Whether or not to create service role for Spot. Should be false for Fargate."
   type        = bool
   default     = true
 }
