@@ -1,4 +1,5 @@
 locals {
+  compute_resource_type_is_fargate = contains(["FARGATE", "FARGATE_SPOT"], var.compute_resource_type)
   tags = {
     managed-by = "Terraform"
   }
@@ -16,11 +17,13 @@ resource "aws_batch_compute_environment" "this" {
   compute_environment_name_prefix = var.compute_environment_name_prefix != null ? format("%s%s", var.prefix, var.compute_environment_name_prefix) : null
 
   compute_resources {
-    instance_role = var.ecs_instance_profile_create ? aws_iam_instance_profile.ecs_instance_role.0.arn : var.ecs_instance_profile_arn
+    instance_role = local.compute_resource_type_is_fargate == false ? (
+      var.ecs_instance_profile_create ? aws_iam_instance_profile.ecs_instance_role.0.arn : var.ecs_instance_profile_arn
+    ) : null
 
     instance_type = var.compute_resource_instance_type
-    min_vcpus     = var.compute_resource_min_vcpus
-    desired_vcpus = var.compute_resource_desired_vcpus
+    min_vcpus     = local.compute_resource_type_is_fargate == false ? var.compute_resource_min_vcpus : null
+    desired_vcpus = local.compute_resource_type_is_fargate == false ? var.compute_resource_desired_vcpus : null
     max_vcpus     = var.compute_resource_max_vcpus
 
     subnets = var.compute_resource_subnet_ids
@@ -45,15 +48,15 @@ resource "aws_batch_compute_environment" "this" {
     }
 
     # only needed for BEST_FIT (default)
-    spot_iam_fleet_role = (var.compute_resource_allocation_strategy == "BEST_FIT" || var.compute_resource_allocation_strategy == null) ? (
+    spot_iam_fleet_role = (local.compute_resource_type_is_fargate == false && (var.compute_resource_allocation_strategy == "BEST_FIT" || var.compute_resource_allocation_strategy == null)) ? (
       var.compute_resource_spot_iam_fleet_role != null ? var.compute_resource_spot_iam_fleet_role : (var.service_role_spot_create ? aws_iam_role.service_role_spot.0.arn : null)
     ) : null
 
-    tags = merge(
+    tags = local.compute_resource_type_is_fargate == false ? merge(
       local.tags,
       var.tags,
       var.compute_resource_tags,
-    )
+    ) : null
   }
 
   type  = var.compute_environment_managed ? "MANAGED" : "UNMANAGED"

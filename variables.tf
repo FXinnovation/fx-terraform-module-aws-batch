@@ -88,7 +88,7 @@ variable "compute_resource_instance_type" {
 }
 
 variable "compute_resource_min_vcpus" {
-  description = "The minimum number of EC2 vCPUs that an environment should maintain."
+  description = "The minimum number of EC2 vCPUs that an environment should maintain. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified."
   type        = number
   default     = 0
 
@@ -110,13 +110,13 @@ variable "compute_resource_max_vcpus" {
 }
 
 variable "compute_resource_type" {
-  description = "The type of compute environment. Valid items are EC2 or SPOT."
+  description = "The type of compute environment. Valid items are FARGATE, FARGATE_SPOT, EC2 or SPOT."
   type        = string
   default     = "EC2"
 
   validation {
-    condition     = contains(["EC2", "SPOT"], var.compute_resource_type)
-    error_message = "The var.compute_resource_type value must be EC2 or SPOT."
+    condition     = contains(["FARGATE", "FARGATE_SPOT", "EC2", "SPOT"], var.compute_resource_type)
+    error_message = "The var.compute_resource_type value must be FARGATE, FARGATE_SPOT, EC2 or SPOT."
   }
 }
 
@@ -153,13 +153,13 @@ variable "compute_resource_ec2_key_pair" {
 }
 
 variable "compute_resource_allocation_strategy" {
-  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT."
+  description = "The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. Valid items are BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED or BEST_FIT. `allocationStrategy` is not applicable for Fargate."
   type        = string
-  default     = "BEST_FIT_PROGRESSIVE"
+  default     = null
 
   validation {
-    condition     = contains(["BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"], var.compute_resource_allocation_strategy)
-    error_message = "The var.compute_resource_allocation_strategy must be BEST_FIT, BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED."
+    condition     = var.compute_resource_allocation_strategy == null || can(contains(["BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"], var.compute_resource_allocation_strategy))
+    error_message = "If var.compute_resource_allocation_strategy set, must be BEST_FIT, BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED."
   }
 }
 
@@ -204,7 +204,7 @@ variable "compute_resource_launch_template" {
 }
 
 variable "compute_resource_desired_vcpus" {
-  description = "The desired number of EC2 vCPUS in the compute environment."
+  description = "The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified."
   type        = number
   default     = null
 
@@ -215,7 +215,7 @@ variable "compute_resource_desired_vcpus" {
 }
 
 variable "compute_resource_tags" {
-  description = "Tags to be used for compute resources (merged with `var.tags`)."
+  description = "Tags to be used for compute resources (merged with `var.tags`). This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified."
   type        = map(string)
   default     = {}
 }
@@ -266,7 +266,7 @@ variable "queue_tags" {
 #####
 
 variable "ecs_instance_profile_create" {
-  description = "Whether or not to create instance profile for ECS instances"
+  description = "Whether or not to create instance profile for ECS instances. Should be false for Fargate."
   type        = bool
   default     = true
 }
