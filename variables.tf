@@ -77,7 +77,7 @@ variable "compute_environment_arns" {
 }
 
 variable "compute_resource_instance_type" {
-  description = "The instances types that can be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to select instance types (from the C4, M4, and R4 instance families) that match the demand of your job queues."
+  description = "The instances types that can be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to select instance types (from the C4, M4, and R4 instance families) that match the demand of your job queues. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified."
   type        = list(string)
   default     = ["c5.large"]
 

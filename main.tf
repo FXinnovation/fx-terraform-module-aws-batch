@@ -21,7 +21,7 @@ resource "aws_batch_compute_environment" "this" {
       var.ecs_instance_profile_create ? aws_iam_instance_profile.ecs_instance_role.0.arn : var.ecs_instance_profile_arn
     ) : null
 
-    instance_type = var.compute_resource_instance_type
+    instance_type = local.compute_resource_type_is_fargate == false ? var.compute_resource_instance_type : null
     min_vcpus     = local.compute_resource_type_is_fargate == false ? var.compute_resource_min_vcpus : null
     desired_vcpus = local.compute_resource_type_is_fargate == false ? var.compute_resource_desired_vcpus : null
     max_vcpus     = var.compute_resource_max_vcpus
